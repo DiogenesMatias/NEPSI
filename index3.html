@@ -15,17 +15,17 @@
 
     // Load the objects from the .gltf files
     const object3d1 = new THREE.Object3D();
-    object3d1.load("./assets/3d/modelo1.gltf");
+    object3d1.load("./Animacao/Acerto-texto-03.gltf");
 
     const object3d2 = new THREE.Object3D();
-    object3d2.load("./assets/3d/modelo2.gltf");
+    object3d2.load("./Animacao/Erro-texto-03.gltf");
 
     // Add the objects to the MindARThree object
     mindarThree.addObject(object3d1, {
-      imageTargetSrc: "./assets/marcadores/targets-01.mind"
+      imageTargetSrc: "./Targets/targets-01.mind"
     });
     mindarThree.addObject(object3d2, {
-      imageTargetSrc: "./assets/marcadores/targets-02.mind"
+      imageTargetSrc: "./Targets/targets-erro-01.mind"
     });
   </script>
 </body>
