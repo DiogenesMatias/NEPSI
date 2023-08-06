@@ -22,34 +22,42 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- Primeiro marcador .mind -->
-    <a-marker preset="custom" type="pattern" url="./Targets/targets-01.mind">
-      <a-entity position="0 0 0">
-        <a-image src="#image1"></a-image>
-        <a-gltf-model src="#object1" position="0 0 0.5"></a-gltf-model>
-      </a-entity>
-    </a-marker>
+    <!-- Componente customizado para exibir modelos 3D associados a cada marcador -->
+    <a-entity mindar-image-target="./Targets/targets-01.mind, ./Targets/targets-02.mind, ./Targets/targets-erro-01.mind" show-object3d-on-scan>
+      <a-image src="#image1" position="0 0 0"></a-image>
+      <a-image src="#image2" position="0 0 0"></a-image>
+      <a-image src="#image3" position="0 0 0"></a-image>
 
-    <!-- Segundo marcador .mind -->
-    <a-marker preset="custom" type="pattern" url="./Targets/targets-02.mind">
-      <a-entity position="0 0 0">
-        <a-image src="#image2"></a-image>
-        <a-gltf-model src="#object2" position="0 0 0.5"></a-gltf-model>
-      </a-entity>
-    </a-marker>
-
-    <!-- Terceiro marcador .mind -->
-    <a-marker preset="custom" type="pattern" url="./Targets/targets-erro-01.mind">
-      <a-entity position="0 0 0">
-        <a-image src="#image3"></a-image>
-        <a-gltf-model src="#object3" position="0 0 0.5"></a-gltf-model>
-      </a-entity>
-    </a-marker>
+      <a-gltf-model id="gltfModel1" src="#object1" position="0 0 0.5"></a-gltf-model>
+      <a-gltf-model id="gltfModel2" src="#object2" position="0 0 1"></a-gltf-model>
+      <a-gltf-model id="gltfModel3" src="#object3" position="0 0 1"></a-gltf-model>
+    </a-entity>
   </a-scene>
 
   <!-- Incluir a biblioteca "Stats" internamente -->
   <script src="./Js/stats.min.js" defer></script>
   <script>
+    // Definir o componente customizado "show-object3d-on-scan"
+    AFRAME.registerComponent('show-object3d-on-scan', {
+      init: function () {
+        const markerEntity = this.el;
+        markerEntity.addEventListener('mindarimagefound', function (event) {
+          const markerId = event.detail.index;
+          // Ocultar todos os modelos 3D
+          document.querySelectorAll('a-gltf-model').forEach(model => model.setAttribute('visible', false));
+          
+          // Mostrar objeto 3D associado ao marcador encontrado
+          if (markerId === 0) {
+            document.getElementById('gltfModel1').setAttribute('visible', true);
+          } else if (markerId === 1) {
+            document.getElementById('gltfModel2').setAttribute('visible', true);
+          } else if (markerId === 2) {
+            document.getElementById('gltfModel3').setAttribute('visible', true);
+          }
+        });
+      }
+    });
+
     // Inicializar a biblioteca "Stats" e adicioná-la à página
     const stats = new Stats();
     stats.showPanel(0); // 0: FPS, 1: ms, 2: MB, 3+: custom
