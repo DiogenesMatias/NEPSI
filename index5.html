@@ -20,19 +20,19 @@
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
     <!-- Primeiro marcador -->
-    <a-marker type="pattern" url="./Targets/pattern-Impacto-Ambiental.patt">
+    <a-marker type="pattern" url="./Targets/pattern-Impacto-Ambiental.patt" id="marker1">
       <a-image src="#image1" position="0 0 0"></a-image>
       <a-gltf-model src="#object1" position="0 0 0.5"></a-gltf-model>
     </a-marker>
 
     <!-- Segundo marcador -->
-    <a-marker type="pattern" url="./Targets/pattern-carta-01-qr.patt">
+    <a-marker type="pattern" url="./Targets/pattern-carta-01-qr.patt" id="marker2">
       <a-image src="#image2" position="0 0 0"></a-image>
       <a-gltf-model src="#object2" position="0 0 1"></a-gltf-model>
     </a-marker>
 
     <!-- Terceiro marcador -->
-    <a-marker type="pattern" url="./Targets/pattern-carta-02-qr.patt">
+    <a-marker type="pattern" url="./Targets/pattern-carta-02-qr.patt" id="marker3">
       <a-image src="#image3" position="0 0 0"></a-image>
       <a-gltf-model src="#object3" position="0 0 1"></a-gltf-model>
     </a-marker>
@@ -47,7 +47,7 @@
       init: function () {
         const markerEntity = this.el;
         markerEntity.addEventListener('markerFound', function (event) {
-          const markerId = event.detail.marker.dataset.markerId;
+          const markerId = event.target.id;
           // Ocultar todos os modelos 3D
           document.querySelectorAll('a-gltf-model').forEach(model => model.setAttribute('visible', false));
           
