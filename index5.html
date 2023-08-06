@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- https://aframe.io/blog/arjs/ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+  <a-scene embedded arjs>
+    <!-- Imagens para cada marcador -->
+    <img id="image1" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-01.png" />
+    <img id="image2" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-02.png" />
+    <img id="image3" src="./Imagens/Erro/Marcador-Impacto-Ambiental-erro-01.png" />
+
+    <!-- Modelos 3D para cada marcador -->
+    <a-asset-item id="object1" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
+    <a-asset-item id="object2" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
+    <a-asset-item id="object3" src="./Animacao/Erro-texto-03.gltf"></a-asset-item>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Primeiro marcador -->
+    <a-marker type="pattern" url="./Targets/targets-01.patt">
+      <a-image src="#image1" position="0 0 0"></a-image>
+      <a-gltf-model src="#object1" position="0 0 0.5"></a-gltf-model>
+    </a-marker>
+
+    <!-- Segundo marcador -->
+    <a-marker type="pattern" url="./Targets/targets-02.patt">
+      <a-image src="#image2" position="0 0 0"></a-image>
+      <a-gltf-model src="#object2" position="0 0 1"></a-gltf-model>
+    </a-marker>
+
+    <!-- Terceiro marcador -->
+    <a-marker type="pattern" url="./Targets/targets-erro-01.patt">
+      <a-image src="#image3" position="0 0 0"></a-image>
+      <a-gltf-model src="#object3" position="0 0 1"></a-gltf-model>
+    </a-marker>
+    
+    <!-- Definir o componente customizado "show-object3d-on-scan" -->
+    <a-entity show-object3d-on-scan></a-entity>
+  </a-scene>
+
+  <script>
+    // Definir o componente customizado "show-object3d-on-scan"
+    AFRAME.registerComponent('show-object3d-on-scan', {
+      init: function () {
+        const markerEntity = this.el;
+        markerEntity.addEventListener('markerFound', function (event) {
+          const markerId = event.detail.marker.dataset.markerId;
+          // Ocultar todos os modelos 3D
+          document.querySelectorAll('a-gltf-model').forEach(model => model.setAttribute('visible', false));
+          
+          // Mostrar objeto 3D associado ao marcador encontrado
+          if (markerId === 'marker1') {
+            document.getElementById('object1').setAttribute('visible', true);
+          } else if (markerId === 'marker2') {
+            document.getElementById('object2').setAttribute('visible', true);
+          } else if (markerId === 'marker3') {
+            document.getElementById('object3').setAttribute('visible', true);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
