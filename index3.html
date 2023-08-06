@@ -1,37 +1,42 @@
 <!DOCTYPE html>     
-<html>      
-<head>      
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">      
-   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
- </head>
-<body>      
-  <div id="container"></div>      
-  <script>      
-    // Aguarde o carregamento completo da página antes de executar o código      
-    window.addEventListener('load', function() {      
-      // Crie o objeto MindARThree      
-      const mindarThree = new MindARThree({      
-        container: document.querySelector("#container")      
-      });      
-      // Carregue os objetos a partir dos arquivos .gltf      
-      const object3d1 = new THREE.Object3D();      
-      const object3d2 = new THREE.Object3D();      
-      const loader = new THREE.GLTFLoader();      
-      loader.load("./Animacao/Acerto-texto-03.gltf", function(gltf1) {      
-        object3d1.add(gltf1.scene);      
-      });      
-      loader.load("./Animacao/Erro-texto-03.gltf", function(gltf2) {      
-        object3d2.add(gltf2.scene);      
-      });      
-      // Adicione os objetos ao MindARThree com os respectivos alvos      
-      mindarThree.addObject(object3d1, {      
-        imageTargetSrc: "./Targets/targets-01.mind"      
-      });      
-      mindarThree.addObject(object3d2, {      
-        imageTargetSrc: "./Targets/targets-erro-01.mind"      
-      });      
-    });      
-  </script>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-image-three.prod.js"></script>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    // Aguarde o carregamento completo da página antes de executar o código
+    window.addEventListener('load', function() {
+      // Crie o objeto MindARThree
+      const mindarThree = new MindARThree({
+        container: document.querySelector("#container")
+      });
+
+      // Carregue os objetos a partir dos arquivos .gltf
+      const object3d1 = new THREE.Object3D();
+      const object3d2 = new THREE.Object3D();
+
+      const loader = new THREE.GLTFLoader();
+      loader.load("./Animacao/Acerto-texto-03.gltf", function(gltf1) {
+        object3d1.add(gltf1.scene);
+      });
+
+      loader.load("./Animacao/Erro-texto-03.gltf", function(gltf2) {
+        object3d2.add(gltf2.scene);
+      });
+
+      // Adicione os objetos ao MindARThree com os respectivos alvos
+      mindarThree.addObject(object3d1, {
+        imageTargetSrc: "./Targets/targets-01.mind"
+      });
+
+      mindarThree.addObject(object3d2, {
+        imageTargetSrc: "./Targets/targets-erro-01.mind"
+      });
+    });
+  </script> 
 </body>
 </html>
