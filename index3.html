@@ -4,21 +4,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  <!-- Incluir a biblioteca "Stats" -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
 </head>
 <body>
+  <a-assets>
+    <!-- Imagens para cada marcador -->
+    <img id="image1" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-01.png" />
+    <img id="image2" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-02.png" />
+    <img id="image3" src="./Imagens/Erro/Marcador-Impacto-Ambiental-erro-01.png" />
+
+    <!-- Modelos 3D para cada marcador -->
+    <a-asset-item id="object1" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
+    <a-asset-item id="object2" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
+    <a-asset-item id="object3" src="./Animacao/Erro-texto-03.gltf"></a-asset-item>
+  </a-assets>
+
   <a-scene color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-
-    <a-assets>
-      <!-- Imagens para cada marcador -->
-      <img id="image1" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-01.png" />
-      <img id="image2" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-02.png" />
-      <img id="image3" src="./Imagens/Erro/Marcador-Impacto-Ambiental-erro-01.png" />
-
-      <!-- Modelos 3D para cada marcador -->
-      <a-asset-item id="object1" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
-      <a-asset-item id="object2" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
-      <a-asset-item id="object3" src="./Animacao/Erro-texto-03.gltf"></a-asset-item>
-    </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -34,8 +36,6 @@
     </a-entity>
   </a-scene>
 
-  <!-- Incluir a biblioteca "Stats" internamente -->
-  <script src="./Js/stats.min.js" defer></script>
   <script>
     // Definir o componente customizado "show-object3d-on-scan"
     AFRAME.registerComponent('show-object3d-on-scan', {
