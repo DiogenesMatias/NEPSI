@@ -39,21 +39,22 @@
         const markerEntity = this.el;
         markerEntity.addEventListener('mindarimagefound', function (event) {
           const markerId = event.detail.index;
+          // Remover todos os modelos 3D existentes
+          markerEntity.querySelectorAll('a-gltf-model').forEach(model => model.parentNode.removeChild(model));
+          
+          // Mostrar objeto 3D associado ao marcador encontrado
           if (markerId === 0) {
-            // Mostrar objeto 3D associado ao primeiro marcador
             markerEntity.appendChild(document.createElement('a-gltf-model'));
             markerEntity.lastChild.setAttribute('src', '#object1');
             markerEntity.lastChild.setAttribute('position', '0 0 0.5');
           } else if (markerId === 1) {
-            // Mostrar objeto 3D associado ao segundo marcador
             markerEntity.appendChild(document.createElement('a-gltf-model'));
             markerEntity.lastChild.setAttribute('src', '#object2');
-            markerEntity.lastChild.setAttribute('position', '0 0 0.5');
+            markerEntity.lastChild.setAttribute('position', '0 0 1');
           } else if (markerId === 2) {
-            // Mostrar objeto 3D associado ao terceiro marcador
             markerEntity.appendChild(document.createElement('a-gltf-model'));
             markerEntity.lastChild.setAttribute('src', '#object3');
-            markerEntity.lastChild.setAttribute('position', '0 0 0.5');
+            markerEntity.lastChild.setAttribute('position', '0 0 1');
           }
         });
       }
