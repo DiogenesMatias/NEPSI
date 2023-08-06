@@ -31,8 +31,8 @@
       <a-image src="#image3" position="0 0 0"></a-image>
 
       <a-gltf-model id="gltfModel1" src="#object1" position="0 0 0.5"></a-gltf-model>
-      <a-gltf-model id="gltfModel2" src="#object2" position="0 0 0.5"></a-gltf-model>
-      <a-gltf-model id="gltfModel3" src="#object3" position="0 0 0.5"></a-gltf-model>
+      <a-gltf-model id="gltfModel2" src="#object2" position="0 0 1"></a-gltf-model>
+      <a-gltf-model id="gltfModel3" src="#object3" position="0 0 1"></a-gltf-model>
     </a-entity>
   </a-scene>
 
@@ -57,7 +57,9 @@
         });
       }
     });
+  </script>
 
+  <script>
     // Inicializar a biblioteca "Stats" e adicioná-la à página
     const stats = new Stats();
     stats.showPanel(0); // 0: FPS, 1: ms, 2: MB, 3+: custom
