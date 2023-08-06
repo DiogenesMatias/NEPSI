@@ -1,34 +1,37 @@
-
 <!DOCTYPE html>
-    <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-        </head>
-        <body>
-            <!--acresentar dois marcadores do tipo .mind-->
-            
-          <a-scene mindar-image="imageTargetSrc: ./targets.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-            
-          <a-assets>
-            <!--acresentar duas  imagem e dois objeto do tipo .gltf -->
-              <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/card.png" />
-              <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
-            </a-assets>
-      
-      
-            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      
-      
-            <a-entity mindar-image-target="targetIndex: 0">
-              <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-              <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-            </a-entity>
-          </a-scene>
-        </body>
-      </html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+  <a-scene mindar-image="imageTargetSrc: ./Targets/targets-01.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-assets>
+      <!-- Primeira imagem -->
+      <img id="card" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-01.png" />
+      <!-- Segunda imagem -->
+      <img id="card2" src="./Imagens/Erro/Marcador-Impacto-Ambiental-erro-01.png" />
 
-        
-    
+      <!-- Primeiro objeto .gltf -->
+      <a-asset-item id="avatarModel" src="./Animacao/Acerto-texto-03.gltf"></a-asset-item>
+      <!-- Segundo objeto .gltf -->
+      <a-asset-item id="avatarModel2" src="./Animacao/Erro-texto-03.gltf"></a-asset-item>
+    </a-assets>
 
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Primeiro marcador .mind -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"></a-gltf-model>
+    </a-entity>
+
+    <!-- Segundo marcador .mind -->
+    <a-entity mindar-image-target="targetIndex: 1">
+      <a-plane src="#card2" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel2" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"></a-gltf-model>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
