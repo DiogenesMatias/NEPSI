@@ -6,10 +6,21 @@
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
- <!-- <a-scene mindar-image="imageTargetSrc: ./Targets/targets-01.mind, ./Targets/targets-02.mind, ./Targets/targets-erro-01.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">-->
- <!-- <a-scene mindar-image="imageTargetSrc: './Targets/targets-01.mind', './Targets/targets-02.mind', './Targets/targets-erro-01.mind'; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">-->
- <a-scene mindar-image="imageTargetSrc: ./Targets/targets-01.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
- 
+  <script>
+    const targetURLs = [
+      "./Targets/targets-01.mind",
+      "./Targets/targets-02.mind",
+      "./Targets/targets-erro-01.mind",
+    ];
+
+    function generateMindarImageAttribute(targetURLs) {
+      return `imageTargetSrc: ${targetURLs.join(", ")}; showStats: true;`;
+    }
+
+    const mindarImageAttribute = generateMindarImageAttribute(targetURLs);
+  </script>
+
+  <a-scene mindar-image="${mindarImageAttribute}" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
       <!-- Imagens para cada marcador -->
       <img id="image1" src="./Imagens/Acerto/Marcador-Impacto-Ambiental-01.png" />
