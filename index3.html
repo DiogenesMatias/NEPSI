@@ -34,20 +34,21 @@
     </a-entity>
   </a-scene>
   <!-- Incluir a biblioteca "Stats" -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
-  <script>
-    // Inicializar a biblioteca "Stats" e adicioná-la à página
-    const stats = new Stats();
-    stats.showPanel(0); // 0: FPS, 1: ms, 2: MB, 3+: custom
-    document.body.appendChild(stats.dom);
-    
-    // Atualizar a biblioteca "Stats" no loop de renderização da cena A-Frame
-    document.querySelector('a-scene').addEventListener('renderstart', function() {
-      stats.begin();
-    });
-    document.querySelector('a-scene').addEventListener('renderend', function() {
-      stats.end();
-    });
-  </script>
+ <!-- Incluir a biblioteca "Stats" com o atributo 'defer' -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" defer></script>
+<script>
+  // Inicializar a biblioteca "Stats" e adicioná-la à página
+  const stats = new Stats();
+  stats.showPanel(0); // 0: FPS, 1: ms, 2: MB, 3+: custom
+  document.body.appendChild(stats.dom);
+
+  // Atualizar a biblioteca "Stats" no loop de renderização da cena A-Frame
+  document.querySelector('a-scene').addEventListener('renderstart', function() {
+    stats.begin();
+  });
+  document.querySelector('a-scene').addEventListener('renderend', function() {
+    stats.end();
+  });
+</script>
 </body>
 </html>
