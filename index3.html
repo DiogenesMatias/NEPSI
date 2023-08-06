@@ -22,25 +22,43 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- Marcador .mind com múltiplas imagens e modelos -->
-    <a-entity mindar-image-target="./Targets/targets-01.mind, ./Targets/targets-02.mind, ./Targets/targets-erro-01.mind">
-      <!-- Primeira imagem e modelo -->
+    <!-- Componente customizado para exibir modelos 3D associados a cada marcador -->
+    <a-entity mindar-image-target="./Targets/targets-01.mind, ./Targets/targets-02.mind, ./Targets/targets-erro-01.mind" show-object3d-on-scan>
       <a-image src="#image1" position="0 0 0"></a-image>
-      <a-gltf-model src="#object1" position="0 0 0.5"></a-gltf-model>
-
-      <!-- Segunda imagem e modelo -->
       <a-image src="#image2" position="0 0 0"></a-image>
-      <a-gltf-model src="#object2" position="0 0 0.5"></a-gltf-model>
-
-      <!-- Terceira imagem e modelo -->
       <a-image src="#image3" position="0 0 0"></a-image>
-      <a-gltf-model src="#object3" position="0 0 0.5"></a-gltf-model>
     </a-entity>
   </a-scene>
 
   <!-- Incluir a biblioteca "Stats" internamente -->
   <script src="./Js/stats.min.js" defer></script>
   <script>
+    // Definir o componente customizado "show-object3d-on-scan"
+    AFRAME.registerComponent('show-object3d-on-scan', {
+      init: function () {
+        const markerEntity = this.el;
+        markerEntity.addEventListener('mindarimagefound', function (event) {
+          const markerId = event.detail.index;
+          if (markerId === 0) {
+            // Mostrar objeto 3D associado ao primeiro marcador
+            markerEntity.appendChild(document.createElement('a-gltf-model'));
+            markerEntity.lastChild.setAttribute('src', '#object1');
+            markerEntity.lastChild.setAttribute('position', '0 0 0.5');
+          } else if (markerId === 1) {
+            // Mostrar objeto 3D associado ao segundo marcador
+            markerEntity.appendChild(document.createElement('a-gltf-model'));
+            markerEntity.lastChild.setAttribute('src', '#object2');
+            markerEntity.lastChild.setAttribute('position', '0 0 0.5');
+          } else if (markerId === 2) {
+            // Mostrar objeto 3D associado ao terceiro marcador
+            markerEntity.appendChild(document.createElement('a-gltf-model'));
+            markerEntity.lastChild.setAttribute('src', '#object3');
+            markerEntity.lastChild.setAttribute('position', '0 0 0.5');
+          }
+        });
+      }
+    });
+
     // Inicializar a biblioteca "Stats" e adicioná-la à página
     const stats = new Stats();
     stats.showPanel(0); // 0: FPS, 1: ms, 2: MB, 3+: custom
