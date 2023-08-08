@@ -1,4 +1,4 @@
-<!--Texto de explicação curso da camera exibicao de msg-->
+<!--Texto de explicação curso da camera exibicao de msg arrumado-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,8 @@
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-cursor></a-cursor>
+
     <!-- Texto para exibir a mensagem de explicação -->
     <a-text id="displayText"
     value=""
@@ -32,7 +34,7 @@
 
     <!-- Primeiro marcador -->
     <a-marker preset="pattern" type="pattern" value="5" url="./Targets/pattern-Impacto-Ambiental.patt">
-       <a-box id="object1" position="0 0.5 0" width="2" height="1" depth="1" color="green" clickable="messageId: 1;"></a-box>
+       <a-box id="object1" position="0 0.5 0" width="2" height="1" depth="1" color="green" show-message-on-hover="message: Mensagem 1"></a-box>
        <a-text id="object1" value="Acertou!!!"
               position="0 1.25 0"
               color="white"
@@ -49,7 +51,7 @@
     <!-- Terceiro marcador -->
     <a-marker preset="pattern" type="pattern" value="15" url="./Targets/pattern-carta-02-qr.patt">
       <!--<a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3">-->
-      <a-box id="object3" position="0 0.5 0" width="2" height="1" depth="1" color="red" clickable="messageId: 2;"></a-box>
+      <a-box id="object3" position="0 0.5 0" width="2" height="1" depth="1" color="red" show-message-on-hover="message: Mensagem 2"></a-box>
       </a-box>
       <a-text id="object4" value="ERROU!!!"
               position="0 1.25 0"
@@ -67,6 +69,14 @@
         position="0 1.5 -2.2"
         text="value: Essa é uma explicação;\nClique para fechar;"
         visible-on-click></a-entity>
+
+    <!-- Cubo "X" para fechar a mensagem -->
+    <a-box id="closeButton"
+           position="0 -0.5 -3"
+           color="gray"
+           scale="0.5 0.1 0.05"
+           show-close-message="visible: false"></a-box>
+
 
 
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
@@ -117,6 +127,7 @@
       }
     });
 
+    /*
     // Componente "clickable" para adicionar evento de clique ao elemento
     AFRAME.registerComponent('clickable', {
         schema: {
@@ -145,11 +156,13 @@
         });
       }
     });
+    */
     //fim do componente "visible-on-click"
 
     // Componente "show-message-on-hover" para exibir mensagem ao passar o mouse
     let timer;
     const displayText = document.getElementById('displayText');
+    const closeButton = document.getElementById('closeButton');
     
     AFRAME.registerComponent('show-message-on-hover', {
       schema: {
@@ -163,12 +176,14 @@
           timer = setTimeout(function () {
             displayText.setAttribute('value', message);
             displayText.setAttribute('visible', true);
+            closeButton.setAttribute('visible', true);
           }, 3000);
         });
 
         el.addEventListener('mouseleave', function () {
           clearTimeout(timer);
           displayText.setAttribute('visible', false);
+          closeButton.setAttribute('visible', false);
         });
       }
     });
