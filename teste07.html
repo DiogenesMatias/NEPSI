@@ -40,10 +40,12 @@
     <!-- Terceiro marcador -->
     <a-marker preset="pattern" type="pattern" value="15" url="./Targets/pattern-carta-02-qr.patt">
       <a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3">
-      <a-animation attribute="scale"
-                     from="2 2 2" to="2.2 2.2 2.2"
-                     dur="1000" repeat="indefinite" direction="alternate"></a-animation>
-        </a-entity>
+      <a-box animation="property: rotation" position="0 0.5 0" width="2" height="1" depth="1" color="red" id="object3"></a-box>
+      <a-text value="ERROU!!!"
+              position="0 1.25 0"
+              color="white"
+              align="center"
+              scale="1.5 1.5 1.5" id="object4"></a-text>
     </a-marker>
     
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
@@ -76,6 +78,7 @@
             if(markerId == '15' && markerId == '10' || markerId == '15' && markerId == '5'){
                     document.getElementById('object1').setAttribute('visible', true);
               document.getElementById('object3').setAttribute('visible', true);
+               document.getElementById('object4').setAttribute('visible', true);
                  }
               break;
           }
