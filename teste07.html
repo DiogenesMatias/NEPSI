@@ -1,3 +1,4 @@
+<!--Texto de explicação-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,11 @@
     <!-- Primeiro marcador -->
     <a-marker preset="pattern" type="pattern" value="5" url="./Targets/pattern-Impacto-Ambiental.patt">
        <a-box id="object1" position="0 0.5 0" width="2" height="1" depth="1" color="green"></a-box>
-       <a-text value="Acertou!!!"
+       <a-text id="object1" value="Acertou!!!"
               position="0 1.25 0"
               color="white"
               align="center"
-              scale="1.5 1.5 1.5" id="object1"></a-text>
+              scale="1.5 1.5 1.5" clickable="messageId: 1;"></a-text>
     </a-marker>
 
     <!-- Segundo marcador -->
@@ -43,18 +44,35 @@
       <!--<a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3">-->
       <a-box id="object3" position="0 0.5 0" width="2" height="1" depth="1" color="red"></a-box>
       </a-box>
-      <a-text value="ERROU!!!"
+      <a-text id="object4" value="ERROU!!!"
               position="0 1.25 0"
               color="white"
               align="center"
-              scale="1.5 1.5 1.5" id="object4"></a-text>
+              scale="1.5 1.5 1.5" clickable="messageId: 2;"></a-text>
     </a-marker>
     
+    <!--Criando poupop de explicação-->
+    <!-- Pop-up de explicação -->
+    <a-entity id="popup"
+        visible="false"
+        geometry="primitive: plane; width: 2; height: 1;"
+        material="color: gray; opacity: 0.9"
+        position="0 1.5 -2.2"
+        text="value: Essa é uma explicação;\nClique para fechar;"
+        visible-on-click></a-entity>
+
+
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
     <a-entity show-object3d-on-scan></a-entity>
   </a-scene>
 
   <script>
+    //Mensagens de explicação
+    const messages = {
+      1: "Mensagem personalizada para o ID 1.",
+      2: "Outra mensagem personalizada para o ID 2."
+    };
+
     // Definir o componente customizado "show-object3d-on-scan"
     AFRAME.registerComponent('show-object3d-on-scan', {
       init: function () {
@@ -87,6 +105,36 @@
         });
       }
     });
+
+    // Componente "clickable" para adicionar evento de clique ao elemento
+    AFRAME.registerComponent('clickable', {
+        schema: {
+        messageId: { default: '' }
+      },
+      init: function () {
+        const el = this.el;
+        el.addEventListener('click', function () {
+          //el.emit('clicked');
+          el.emit('clicked', { messageId: this.getAttribute('clickable').messageId });
+        });
+      }
+    });
+
+    // Componente "visible-on-click" para exibir/ocultar elementos ao clicar
+    AFRAME.registerComponent('visible-on-click', {
+      init: function () {
+        const el = this.el;
+        const popup = document.getElementById('popup');
+
+        el.addEventListener('clicked', function () {
+          //popup.setAttribute('visible', !popup.getAttribute('visible'));
+          const messageId = event.detail.messageId;
+          popup.setAttribute('text', 'value', messages[messageId]);
+          popup.setAttribute('visible', !popup.getAttribute('visible'));
+        });
+      }
+    });
+
   </script>
 </body>
 </html>
