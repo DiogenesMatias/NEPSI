@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+ 
 </head>
 <body>
   <a-scene embedded arjs>
@@ -26,7 +26,7 @@
     <a-marker preset="pattern" type="pattern" value="5" url="./Targets/pattern-Impacto-Ambiental.patt">
      <!--<a-image src="#image1" position="0 0 0"></a-image> --> 
      <!--<a-gltf-model src="#object1" position="0 0 0.5"></a-gltf-model>--> 
-     <a-entity text-geometry="value: Acertou!" id="object1"></a-entity>
+     <a-entity text="value: Acertou!;"id="object1"></a-entity>
     </a-marker>
 
     <!-- Segundo marcador -->
@@ -39,7 +39,7 @@
     <a-marker preset="pattern" type="pattern" value="15" url="./Targets/pattern-carta-02-qr.patt">
       <!--<a-image src="#image3" position="0 0 0"></a-image>-->
       <!--<a-gltf-model src="#object3" position="0 0 1"></a-gltf-model>-->
-      <a-entity text-geometry="value: Errou!" id="object3"></a-entity>
+      <a-entity text="value: Errou!;"id="object3"></a-entity>
     </a-marker>
     
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
@@ -54,7 +54,7 @@
         markerEntity.addEventListener('markerFound', function (event) {
           const markerId = event.target.getAttribute('value');
           // Ocultar todos os modelos 3D
-          document.querySelectorAll('a-gltf-model').forEach(model => model.setAttribute('visible', false));
+          document.querySelectorAll('a-entity').forEach(model => model.setAttribute('visible', false));
           
           // Mostrar objeto 3D associado ao marcador encontrado
           if (markerId === '5' && markerId === '10' || markerId === '10' && markerId === '5') {
