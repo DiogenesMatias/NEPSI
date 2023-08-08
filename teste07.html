@@ -24,10 +24,11 @@
 
     <!-- Primeiro marcador -->
     <a-marker preset="pattern" type="pattern" value="5" url="./Targets/pattern-Impacto-Ambiental.patt">
-      <a-entity text="value: Acertou!; color: green; scale: 2 2 2;"  id="object1"></a-entity>
+      <a-entity text="value: Acertou!; color: green; scale: 2 2 2;"  id="object1">
       <a-animation attribute="scale"
                      from="2 2 2" to="2.2 2.2 2.2"
                      dur="1000" repeat="indefinite" direction="alternate"></a-animation>
+        </a-entity>
     </a-marker>
 
     <!-- Segundo marcador -->
@@ -38,10 +39,11 @@
 
     <!-- Terceiro marcador -->
     <a-marker preset="pattern" type="pattern" value="15" url="./Targets/pattern-carta-02-qr.patt">
-      <a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3"></a-entity>
+      <a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3">
       <a-animation attribute="scale"
                      from="2 2 2" to="2.2 2.2 2.2"
                      dur="1000" repeat="indefinite" direction="alternate"></a-animation>
+        </a-entity>
     </a-marker>
     
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
