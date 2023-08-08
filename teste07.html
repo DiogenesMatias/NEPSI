@@ -20,18 +20,11 @@
       <a-asset-item id="object3" src="./Animacao/Erro-texto-03.gltf"></a-asset-item>
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-    <a-cursor></a-cursor>
-
-    <!-- Texto para exibir a mensagem de explicação -->
-    <a-text id="displayText"
-    value=""
-    position="0 1.5 -3"
-    color="white"
-    align="center"
-    scale="1.5 1.5 1.5"
-    visible="false"></a-text>
-
+    <a-camera position="0 0 0" look-controls="enabled: false">
+        <a-cursor></a-cursor>
+      
+    </a-camera>
+  
     <!-- Primeiro marcador -->
     <a-marker preset="pattern" type="pattern" value="5" url="./Targets/pattern-Impacto-Ambiental.patt">
        <a-box id="object1" position="0 0.5 0" width="2" height="1" depth="1" color="green" show-message-on-hover="message: Mensagem 1"></a-box>
@@ -70,15 +63,16 @@
         text="value: Essa é uma explicação;\nClique para fechar;"
         visible-on-click></a-entity>
 
-    <!-- Cubo "X" para fechar a mensagem -->
-    <a-box id="closeButton"
-           position="0 -0.5 -3"
-           color="gray"
-           scale="0.5 0.1 0.05"
-           show-close-message="visible: false"></a-box>
-
-
-
+  <!-- Texto para exibir a mensagem de explicação -->
+    <a-text id="displayText"
+    value=""
+    position="0 1.5 -3"
+    color="white"
+    align="center"
+    scale="1.5 1.5 1.5"
+    visible="false"></a-text>
+    
+   
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
     <a-entity show-object3d-on-scan></a-entity>
   </a-scene>
@@ -162,11 +156,11 @@
     // Componente "show-message-on-hover" para exibir mensagem ao passar o mouse
     let timer;
     const displayText = document.getElementById('displayText');
-    const closeButton = document.getElementById('closeButton');
+   // const closeButton = document.getElementById('closeButton');
     
     AFRAME.registerComponent('show-message-on-hover', {
       schema: {
-        message: { type: 'string', default: '' }
+        message: { type: 'string', default: 'teste padrao' }
       },
       init: function () {
         const el = this.el;
@@ -176,14 +170,14 @@
           timer = setTimeout(function () {
             displayText.setAttribute('value', message);
             displayText.setAttribute('visible', true);
-            closeButton.setAttribute('visible', true);
+            //closeButton.setAttribute('visible', true);
           }, 3000);
         });
 
         el.addEventListener('mouseleave', function () {
           clearTimeout(timer);
           displayText.setAttribute('visible', false);
-          closeButton.setAttribute('visible', false);
+          //closeButton.setAttribute('visible', false);
         });
       }
     });
