@@ -1,3 +1,5 @@
+<!--Versao final de teste com marcadores finais-->
+
 <!--Teste final 08/08/2023-->
 <!DOCTYPE html>
 <html>
@@ -12,11 +14,10 @@
      
     <a-camera position="0 0 0" look-controls="enabled: false">
         <a-cursor></a-cursor>
-      
     </a-camera>
   
     <!-- Primeiro Chaves Impacto Acerto-->
-    <a-marker preset="pattern" type="pattern" value="5" url="./Targets/AR-Marcador/pattern-impacto_ambiental_qr.patt">
+    <a-marker preset="pattern" type="pattern" value="1" url="./Targets/AR-Marcador/pattern-impacto_ambiental_qr.patt">
        <a-box id="object1" position="0 0.5 0" width="2" height="1" depth="1" color="green" show-message-on-hover="message: Mensagem 1"></a-box>
        <a-text id="object1" value="Acertou!!!"
               position="0 1.25 0"
@@ -27,7 +28,7 @@
 
 
     <!-- Terceiro Chaves Impacto Erro-->
-    <a-marker preset="pattern" type="pattern" value="15" url="./Targets/AR-Marcador/pattern-NEPSI-QR.patt">
+    <a-marker preset="pattern" type="pattern" value="2" url="./Targets/AR-Marcador/pattern-NEPSI-QR.patt">
       <!--<a-entity text="value: Errou!; color: red; scale: 2 2 2" id="object3">-->
       <a-box id="object3" position="0 0.5 0" width="2" height="1" depth="1" color="red" show-message-on-hover="message: Mensagem 2"></a-box>
       </a-box>
@@ -39,58 +40,26 @@
     </a-marker>
 
        <!-- Outros cartas -->
-    <a-marker preset="pattern" type="pattern" value="10" url="./Targets/AR-Marcador/pattern-aterro_sanitario_qr.patt">   
+    <a-marker preset="pattern" type="pattern" value="3" url="./Targets/AR-Marcador/pattern-aterro_sanitario_qr.patt">   
     </a-marker>
 
-      <a-marker preset="pattern" type="pattern" value="10" url="./Targets/AR-Marcador/pattern-desmatamento_qr.patt">   
+      <a-marker preset="pattern" type="pattern" value="4" url="./Targets/AR-Marcador/pattern-desmatamento_qr.patt">   
     </a-marker>
 
-      <a-marker preset="pattern" type="pattern" value="10" url="./Targets/AR-Marcador/pattern-poluicao_no_mar_qr.patt">   
+      <a-marker preset="pattern" type="pattern" value="5" url="./Targets/AR-Marcador/pattern-poluicao_no_mar_qr.patt">   
     </a-marker>
 
-      <a-marker preset="pattern" type="pattern" value="10" url="./Targets/AR-Marcador/pattern-poluicao_sonora.patt">   
+      <a-marker preset="pattern" type="pattern" value="6" url="./Targets/AR-Marcador/pattern-poluicao_sonora.patt">   
     </a-marker>
 
-      <a-marker preset="pattern" type="pattern" value="10" url="./Targets/AR-Marcador/pattern-queimadas_qr.patt">   
+      <a-marker preset="pattern" type="pattern" value="7" url="./Targets/AR-Marcador/pattern-queimadas_qr.patt">   
     </a-marker>
 
-      
-    
-    <!--Criando poupop de explicação-->
-    <!-- Pop-up de explicação -->
-    <a-entity id="popup"
-        visible="false"
-        geometry="primitive: plane; width: 2; height: 1;"
-        material="color: gray; opacity: 0.9"
-        position="0 1.5 -2.2"
-        text="value: Essa é uma explicação;\nClique para fechar;"
-        visible-on-click></a-entity>
-
-  <!-- Texto para exibir a mensagem de explicação -->
-   <a-plane id="displayText"
-             position="0 1.5 -3"
-             width="2"
-             height="1"
-             color="black"
-             opacity="0.7"
-             visible="false">
-      <a-text value="" align="center" color="white"></a-text>
-    </a-plane>
-   
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
     <a-entity show-object3d-on-scan></a-entity>
   </a-scene>
 
   <script>
-
-
-
-
-    //Mensagens de explicação
-    const messages = {
-      1: "Mensagem personalizada para o ID 1.",
-      2: "Outra mensagem personalizada para o ID 2."
-    };
 
     // Definir o componente customizado "show-object3d-on-scan"
     AFRAME.registerComponent('show-object3d-on-scan', {
@@ -103,114 +72,33 @@
           
           // Mostrar objeto 3D associado ao marcador encontrado
           switch (markerId) {
-            case '5','10':
-                if(markerId == '5' && markerId == '10' || markerId == '10' && markerId == '5'){
-                    document.getElementById('object1').setAttribute('visible', true);
+            case '1':
+                if(markerId == '1' && markerId == '3' || markerId == '1' && markerId == '4' 
+                || markerId == '1' && markerId == '5' || markerId == '1' && markerId == '6'
+                || markerId == '1' && markerId == '7' ){
+              document.getElementById('object1').setAttribute('visible', true);
               document.getElementById('object1').setAttribute('visible', true);
               
                 }
-              break;
-           // case '10':
-           //   document.getElementById('object2').setAttribute('visible', true);
-           //   break;
-            case '15':
-            if(markerId == '15' && markerId == '10' || markerId == '15' && markerId == '5'){
-                    document.getElementById('object1').setAttribute('visible', true);
-              document.getElementById('object3').setAttribute('visible', true);
-               document.getElementById('object4').setAttribute('visible', true);
-                 }
-              break;
-          }
-        });
-      }
-    });
-
-    /*
-    // Componente "clickable" para adicionar evento de clique ao elemento
-    AFRAME.registerComponent('clickable', {
-        schema: {
-        messageId: { default: '' }
-      },
-      init: function () {
-        const el = this.el;
-        el.addEventListener('click', function () {
-          //el.emit('clicked');
-          el.emit('clicked', { messageId: this.getAttribute('clickable').messageId });
-        });
-      }
-    });
-
-    // Componente "visible-on-click" para exibir/ocultar elementos ao clicar
-    AFRAME.registerComponent('visible-on-click', {
-      init: function () {
-        const el = this.el;
-        const popup = document.getElementById('popup');
-
-        el.addEventListener('clicked', function () {
-          //popup.setAttribute('visible', !popup.getAttribute('visible'));
-          const messageId = event.detail.messageId;
-          popup.setAttribute('text', 'value', messages[messageId]);
-          popup.setAttribute('visible', !popup.getAttribute('visible'));
-        });
-      }
-    });
-    */
-    //fim do componente "visible-on-click"
-
-    // Componente "show-message-on-hover" para exibir mensagem ao passar o mouse
-    let timer;
-    const displayText = document.getElementById('displayText');
-   // const closeButton = document.getElementById('closeButton');
-    
-    AFRAME.registerComponent('show-message-on-hover', {
-      schema: {
-        message: { type: 'string', default: '' }
-      },
-      init: function () {
-        const el = this.el;
-        const message = this.data.message;
-
-        el.addEventListener('mouseenter', function () {
-          timer = setTimeout(function () {
-            displayText.setAttribute('visible', true);
-            displayText.querySelector('a-text').setAttribute('value', message);
+                break;
           
-            //closeButton.setAttribute('visible', true);
-          }, 3000);
-        });
-
-        el.addEventListener('mouseleave', function () {
-          clearTimeout(timer);
-          displayText.setAttribute('visible', false);
-          //closeButton.setAttribute('visible', false);
-        });
-      }
-    });
-
-    AFRAME.registerComponent('show-close-message', {
-      schema: {
-        visible: { type: 'boolean', default: false }
-      },
-      init: function () {
-        const el = this.el;
-        const visible = this.data.visible;
-
-        el.addEventListener('mouseenter', function () {
-          if (visible) {
-            displayText.setAttribute('visible', false);
+            case '2':
+                if(markerId == '2' && markerId == '3' || markerId == '2' && markerId == '4' 
+                    || markerId == '2' && markerId == '5' || markerId == '2' && markerId == '6'
+                    || markerId == '2' && markerId == '7' ){
+                        document.getElementById('object3').setAttribute('visible', true);
+                        document.getElementById('object4').setAttribute('visible', true);
+                 }
+                break;
+            default:
+                    document.getElementById('object3').setAttribute('visible', true);
+                    document.getElementById('object4').setAttribute('visible', true); 
+                break;
           }
         });
       }
     });
-    
-    const focusTarget1 = document.getElementById('object1');
-    const focusTarget2 = document.getElementById('object3');
-    
-    focusTarget1.setAttribute('show-message-on-hover', 'message: Mensagem 1');
-    focusTarget2.setAttribute('show-message-on-hover', 'message: Mensagem 2');
 
-
-
-  </script>
+</script>
 </body>
 </html>
