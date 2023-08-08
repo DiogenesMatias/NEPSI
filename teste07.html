@@ -64,14 +64,15 @@
         visible-on-click></a-entity>
 
   <!-- Texto para exibir a mensagem de explicação -->
-    <a-text id="displayText"
-    value=""
-    position="0 1.5 -3"
-    color="white"
-    align="center"
-    scale="1.5 1.5 1.5"
-    visible="false"></a-text>
-    
+   <a-plane id="displayText"
+             position="0 1.5 -3"
+             width="2"
+             height="1"
+             color="black"
+             opacity="0.7"
+             visible="false">
+      <a-text value="" align="center" color="white"></a-text>
+    </a-plane>
    
     <!-- Definir o componente customizado "show-object3d-on-scan" -->
     <a-entity show-object3d-on-scan></a-entity>
@@ -160,7 +161,7 @@
     
     AFRAME.registerComponent('show-message-on-hover', {
       schema: {
-        message: { type: 'string', default: 'teste padrao' }
+        message: { type: 'string', default: '' }
       },
       init: function () {
         const el = this.el;
@@ -168,8 +169,9 @@
 
         el.addEventListener('mouseenter', function () {
           timer = setTimeout(function () {
-            displayText.setAttribute('value', message);
             displayText.setAttribute('visible', true);
+            displayText.querySelector('a-text').setAttribute('value', message);
+          
             //closeButton.setAttribute('visible', true);
           }, 3000);
         });
@@ -182,6 +184,22 @@
       }
     });
 
+    AFRAME.registerComponent('show-close-message', {
+      schema: {
+        visible: { type: 'boolean', default: false }
+      },
+      init: function () {
+        const el = this.el;
+        const visible = this.data.visible;
+
+        el.addEventListener('mouseenter', function () {
+          if (visible) {
+            displayText.setAttribute('visible', false);
+          }
+        });
+      }
+    });
+    
     const focusTarget1 = document.getElementById('object1');
     const focusTarget2 = document.getElementById('object3');
     
